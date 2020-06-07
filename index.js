@@ -26,11 +26,8 @@ bot.on("message", async message => {
         if(args[0] === "0") return message.channel.send('Veuillez écrire un nombre entre 1 et 100');
 
         let messageDelete = parseInt(args[0]);
-
         if (messageDelete > 99) messageDelete = 99;
-
         let messages = await message.channel.messages.fetch({limit: 100});
-
         message.channel.bulkDelete(messages);
     }
 
