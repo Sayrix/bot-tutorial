@@ -46,4 +46,22 @@ bot.on("message", async message => {
     }
 });
 
+bot.on("guildMemberAdd", member => {
+    let embed = new Discord.MessageEmbed()
+    .setFooter('Nous sommes désormais ' + member.guild.memberCount)
+    .setAuthor(`👋 ${member.user.username} a rejoint le serveur !`, member.user.displayAvatarURL())
+    .setColor('00ff80')
+    member.guild.channels.cache.get('channel_id').send(embed);
+    member.send(`Bienvenue sur le serveur ! Grâce à toi nous sommes **${member.guild.memberCount}**`);
+    member.roles.add('roles_id');
+})
+
+bot.on("guildMemberRemove", member => {
+    let embed = new Discord.MessageEmbed()
+    .setFooter('Nous sommes désormais ' + member.guild.memberCount)
+    .setAuthor(`😢 ${member.user.username} a quitté le serveur...`, member.user.displayAvatarURL())
+    .setColor('ff3030')
+    member.guild.channels.cache.get('channel_id').send(embed);
+})
+
 bot.login(config.token);
